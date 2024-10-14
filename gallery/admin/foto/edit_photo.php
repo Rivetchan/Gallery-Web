@@ -35,14 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $deskripsi = $_POST['deskripsi'];
     $albumID = $_POST['albumID'];
     $userID = $_POST['userID'];
+    $lokasiFile = $_POST['lokasiFile'];
 
     // Update data foto
-    $sql_update = "UPDATE foto SET JudulFoto=?, Deskripsi=?, AlbumID=?, UserID=? WHERE FotoID=?";
+    $sql_update = "UPDATE foto SET JudulFoto=?, Deskripsi=?, AlbumID=?, UserID=?, LokasiFile=? WHERE FotoID=?";
     $stmt_update = $kon->prepare($sql_update);
-    $stmt_update->bind_param("ssiii", $judulFoto, $deskripsi, $albumID, $userID, $photoId);
+    $stmt_update->bind_param("ssissi", $judulFoto, $deskripsi, $albumID, $userID, $lokasiFile, $photoId);
     
     if ($stmt_update->execute()) {
-        echo "<script>alert('Foto updated successfully!'); window.location.href='manage_photos.php';</script>";
+        echo "<script>alert('Foto updated successfully!'); window.location.href='../manage_photos.php';</script>";
     } else {
         echo "<script>alert('Failed to update photo!');</script>";
     }
@@ -104,6 +105,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        .image-preview {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -111,17 +125,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h1>Edit Photo</h1>
     <form method="POST" action="">
+        <!-- Preview of the photo -->
+        <div class="image-preview">
+            <img src="../../public/foto/aset/<?php echo htmlspecialchars($photo['LokasiFile']); ?>" alt="Photo Preview">
+        </div>
+
         <label for="judulFoto">Judul Foto:</label>
-        <input type="text" id="judulFoto" name="judulFoto" value="<?php echo $photo['JudulFoto']; ?>" required>
+        <input type="text" id="judulFoto" name="judulFoto" value="<?php echo htmlspecialchars($photo['JudulFoto']); ?>" required>
 
         <label for="deskripsi">Deskripsi:</label>
-        <input type="text" id="deskripsi" name="deskripsi" value="<?php echo $photo['Deskripsi']; ?>" required>
+        <input type="text" id="deskripsi" name="deskripsi" value="<?php echo htmlspecialchars($photo['Deskripsi']); ?>" required>
 
         <label for="albumID">Album ID:</label>
-        <input type="number" id="albumID" name="albumID" value="<?php echo $photo['AlbumID']; ?>" required>
+        <input type="number" id="albumID" name="albumID" value="<?php echo htmlspecialchars($photo['AlbumID']); ?>" required>
 
         <label for="userID">User ID:</label>
-        <input type="number" id="userID" name="userID" value="<?php echo $photo['UserID']; ?>" required>
+        <input type="number" id="userID" name="userID" value="<?php echo htmlspecialchars($photo['UserID']); ?>" required>
+
+        <!-- Input for LokasiFile -->
+        <label for="lokasiFile">Lokasi File (Relative Path):</label>
+        <input type="file" id="lokasiFile" name="lokasiFile" value="<?php echo htmlspecialchars($photo['LokasiFile']); ?>" required>
 
         <input type="submit" value="Update Photo">
     </form>

@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.action-menu {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.btn.back-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn.back-btn:hover {
+    background-color: #0056b3;
+}
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.gallery-item {
+    margin: 10px;
+    text-align: center;
+    transition: transform 0.3s;
+    border: 1px solid #ddd; /* Border untuk membedakan gambar */
+    border-radius: 5px; /* Sudut yang membulat */
+    overflow: hidden; /* Memastikan konten tidak meluber */
+    background-color: #fff; /* Warna latar belakang item */
+}
+
+.gallery-item:hover {
+    transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+.gallery-image {
+    width: 150px; /* Mengatur lebar gambar */
+    height: auto; /* Menjaga rasio aspek */
+    display: block;
+    margin: 0 auto; /* Pusatkan gambar */
+}
+
+.info {
+    padding: 10px;
+}
+
+.image-title {
+    font-size: 1.2em; /* Ukuran font judul */
+    margin: 5px 0;
+    color: #333;
+}
+
+.image-description {
+    font-size: 0.9em; /* Ukuran font deskripsi */
+    color: #666; /* Warna untuk deskripsi */
+}

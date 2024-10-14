@@ -57,6 +57,5 @@ $result_photos = $kon->query($sql_photos);
         </tbody>
     </table>
 </div>
-
 </body>
 </html>

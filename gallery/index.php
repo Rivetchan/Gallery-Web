@@ -51,29 +51,30 @@ if (isset($_SESSION['Username'])) {
         <button class="arrow left" id="prevBtn">&#10094;</button>
         <div class="image-track">
             <div class="image-container">
-                <a href="album.php?album=20th_century_boys">
+                <a href="foto_album.php?AlbumID=2">
                     <img src="source/images/20 Century Manga.jpg" alt="Gallery Image">
                     <div class="category-label">20th Century Boys</div>
                 </a>
             </div>
             <div class="image-container">
-                <a href="album.php?album=spiderman">
+                <a href="foto_album.php?AlbumID=1">
                     <img src="source/images/Spiderman.jpg" alt="Gallery Image">
                     <div class="category-label">Spider-Man Across The Spider-Verse</div>
                 </a>
             </div>
             <div class="image-container">
-                <a href="album.php?album=cyber_security">
+                <a href="foto_album.php?AlbumID=3">
                     <img src="source/images/Cyber Security.png" alt="Gallery Image">
                     <div class="category-label">Cyber Security</div>
                 </a>
             </div>
             <div class="image-container">
-                <a href="album.php?album=murder_drones">
+                <a href="foto_album.php?AlbumID=4">
                     <img src="source/images/Murder Drones.jpg" alt="Gallery Image">
                     <div class="category-label">Murder Drones</div>
                 </a>
             </div>
+        </div>
         </div>
         <button class="arrow right" id="nextBtn">&#10095;</button>
     </div>
