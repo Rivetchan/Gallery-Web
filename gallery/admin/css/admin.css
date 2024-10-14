@@ -1,0 +1,134 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+nav {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    transition: background-color 0.3s ease, height 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav:hover {
+    background-color: #444;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold; /* Menebalkan teks */
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #4CAF50;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center; /* Mengatur teks ke tengah */
+}
+
+.stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px; /* Sudut yang lebih melingkar */
+    padding: 20px;
+    flex: 1;
+    margin: 10px;
+    min-width: 200px; /* Lebar minimum yang lebih besar */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Bayangan yang lebih halus */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px); /* Mengangkat item saat hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px; /* Padding yang lebih besar */
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px; /* Padding yang lebih besar */
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold; /* Menebalkan teks */
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn-danger {
+    background-color: #f44336;
+}
+
+.btn-danger:hover {
+    background-color: #e53935;
+}
+
+@media (max-width: 768px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+        text-align: center; /* Menyelaraskan teks di tengah untuk mobile */
+    }
+
+    .stats {
+        flex-direction: column;
+    }
+
+    .stat-item {
+        margin: 5px 0; /* Mengurangi margin untuk tampilan mobile */
+    }
+}
