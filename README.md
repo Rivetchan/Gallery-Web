@@ -1,3 +1,21 @@
+![Index Utama](https://github.com/user-attachments/assets/2d9a070f-4042-41ab-9f5a-e31ef25aea24)
+
+
+HALAMAN UTAMA
+
+
+![Halaman Admin](https://github.com/user-attachments/assets/47e775e1-659f-45ad-9002-f3bdf7e7dc7e)
+
+
+HALAMAN ADMIN
+
+
+![Halaman Foto](https://github.com/user-attachments/assets/018ba872-4212-424e-8d75-6517b2e66282)
+
+
+HALAMAN FOTO
+
+
 # Gallery Foto
 
 ## Deskripsi
