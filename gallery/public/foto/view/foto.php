@@ -53,7 +53,6 @@ if (!$result) {
             <a class="active" href="../../../index.php">Home</a>
             <a href="../../album/view/album.php">Album</a>
             <a href="tambah.php">Create Foto</a>
-            <a href="../controller/hapus.php">Hapus Foto</a>
             <button onclick="window.print();">Print Semua Foto</button>
         </div>
 
