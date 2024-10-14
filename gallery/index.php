@@ -2,12 +2,12 @@
 session_start();
 $isLoggedIn = false;
 $Username = '';
-$level = 0; // Menambahkan variabel untuk level
+$level = 0; 
 
 if (isset($_SESSION['Username'])) {
     $Username = $_SESSION['Username'];
     $isLoggedIn = true;
-    $level = $_SESSION['level']; // Mendapatkan level dari sesi
+    $level = $_SESSION['level'];
 }
 ?>
 <html>

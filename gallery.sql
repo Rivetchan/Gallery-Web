@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2024 at 04:50 AM
+-- Generation Time: Oct 14, 2024 at 04:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -65,8 +65,8 @@ CREATE TABLE `foto` (
 
 INSERT INTO `foto` (`FotoID`, `JudulFoto`, `Deskripsi`, `TanggalUnggah`, `LokasiFile`, `AlbumID`, `UserID`) VALUES
 (1, 'Peni Parker', 'Best Heroine', '2024-10-10 15:14:00', 'Peni Parker.jpg', 1, 2),
-(2, 'Friend', '20th Century Boys', '2024-10-10 18:45:00', '20 Century boys.jpg', 1, 2),
-(3, 'Miles Morales', 'Main Character in SpiderVerse', '2024-10-13 10:04:00', 'Miles Morales.jpeg', 1, 1);
+(2, 'Friend', '20th Century Boys', '2024-10-10 18:45:00', '20 Century boys.jpg', 2, 2),
+(3, 'Miles Morales', 'Main Character in SpiderVerse', '2024-10-13 10:04:00', 'Miles Morales.jpeg', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -87,9 +87,12 @@ CREATE TABLE `komentarfoto` (
 --
 
 INSERT INTO `komentarfoto` (`KomentarID`, `FotoID`, `UserID`, `IsiKomentar`, `TanggalKomentar`) VALUES
-(1, 1, 2, '123', '2024-10-14 05:57:42'),
 (2, 2, 2, 'Keren banget\r\n', '2024-10-14 06:20:23'),
-(4, 2, 2, 'Keren banget gambarnya', '2024-10-14 09:48:30');
+(4, 2, 2, 'Keren banget gambarnya', '2024-10-14 09:48:30'),
+(5, 3, 1, 'gg\r\n', '2024-10-14 21:02:17'),
+(7, 1, 1, 'Keren kali gambarnya', '2024-10-14 21:12:58'),
+(8, 1, 1, 'Amboi Cantiknya', '2024-10-14 21:15:10'),
+(10, 1, 2, 'Wow\r\n', '2024-10-14 21:16:51');
 
 -- --------------------------------------------------------
 
@@ -110,7 +113,10 @@ CREATE TABLE `likefoto` (
 
 INSERT INTO `likefoto` (`LikeID`, `FotoID`, `UserID`, `TanggalLike`) VALUES
 (29, 2, 2, '2024-10-14 06:20:15'),
-(30, 3, 2, '2024-10-14 06:20:16');
+(32, 3, 2, '2024-10-14 11:18:25'),
+(33, 1, 2, '2024-10-14 21:01:52'),
+(34, 1, 1, '2024-10-14 21:02:13'),
+(35, 3, 1, '2024-10-14 21:02:14');
 
 -- --------------------------------------------------------
 
@@ -197,13 +203,13 @@ ALTER TABLE `foto`
 -- AUTO_INCREMENT for table `komentarfoto`
 --
 ALTER TABLE `komentarfoto`
-  MODIFY `KomentarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `KomentarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `likefoto`
 --
 ALTER TABLE `likefoto`
-  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `LikeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `user`
