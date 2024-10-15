@@ -10,10 +10,16 @@ HALAMAN UTAMA
 HALAMAN ADMIN
 
 
-![Halaman Foto](https://github.com/user-attachments/assets/018ba872-4212-424e-8d75-6517b2e66282)
+![Halaman Foto](https://github.com/user-attachments/assets/63e616d2-eb68-40fc-aae8-17ff183a0b69)
 
 
 HALAMAN FOTO
+
+
+![Foto Berdasarkan Album](https://github.com/user-attachments/assets/084e886e-f1a1-4685-928f-4d6779b78315)
+
+
+HALAMAN FOTO BERDASARKAN ALBUM
 
 
 # Gallery Foto
