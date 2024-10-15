@@ -14,9 +14,9 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $albumId);
     
     if ($stmt->execute()) {
-        echo "<script>alert('Album deleted successfully!'); window.location.href='manage_albums.php';</script>";
+        echo "<script>alert('Album deleted successfully!'); window.location.href='../manage_albums.php';</script>";
     } else {
-        echo "<script>alert('Failed to delete album!'); window.location.href='manage_albums.php';</script>";
+        echo "<script>alert('Failed to delete album!'); window.location.href='../manage_albums.php';</script>";
     }
 } else {
     header("Location: ../manage_albums.php");

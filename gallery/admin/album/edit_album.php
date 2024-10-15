@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt_update->bind_param("ssi", $namaAlbum, $deskripsi, $albumId);
     
     if ($stmt_update->execute()) {
-        echo "<script>alert('Album updated successfully!'); window.location.href='manage_albums.php';</script>";
+        echo "<script>alert('Album updated successfully!'); window.location.href='../manage_albums.php';</script>";
     } else {
         echo "<script>alert('Failed to update album!');</script>";
     }

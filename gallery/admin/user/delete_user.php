@@ -14,9 +14,9 @@ if (isset($_GET['id'])) {
     $stmt->bind_param("i", $userId);
     
     if ($stmt->execute()) {
-        echo "<script>alert('User deleted successfully!'); window.location.href='manage_users.php';</script>";
+        echo "<script>alert('User deleted successfully!'); window.location.href='../manage_users.php';</script>";
     } else {
-        echo "<script>alert('Failed to delete user!'); window.location.href='manage_users.php';</script>";
+        echo "<script>alert('Failed to delete user!'); window.location.href='../manage_users.php';</script>";
     }
 } else {
     header("Location: ../manage_users.php");
