@@ -2,13 +2,11 @@
 session_start();
 include_once("../../config/koneksi.php");
 
-// Cek apakah pengguna sudah login dan levelnya admin (1)
 if (!isset($_SESSION['Username']) || $_SESSION['level'] != 1) {
     header("Location: ../../login.php");
     exit();
 }
 
-// Cek apakah ID foto ada di URL
 if (!isset($_GET['id'])) {
     header("Location: ../manage_photos.php");
     exit();
@@ -16,7 +14,6 @@ if (!isset($_GET['id'])) {
 
 $photoId = intval($_GET['id']);
 
-// Ambil data foto dari database
 $sql_photo = "SELECT * FROM foto WHERE FotoID = ?";
 $stmt = $kon->prepare($sql_photo);
 $stmt->bind_param("i", $photoId);
@@ -29,7 +26,6 @@ if (!$photo) {
     exit();
 }
 
-// Proses penyimpanan data jika form di-submit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $judulFoto = $_POST['judulFoto'];
     $deskripsi = $_POST['deskripsi'];
@@ -37,7 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $userID = $_POST['userID'];
     $lokasiFile = $_POST['lokasiFile'];
 
-    // Update data foto
     $sql_update = "UPDATE foto SET JudulFoto=?, Deskripsi=?, AlbumID=?, UserID=?, LokasiFile=? WHERE FotoID=?";
     $stmt_update = $kon->prepare($sql_update);
     $stmt_update->bind_param("ssissi", $judulFoto, $deskripsi, $albumID, $userID, $lokasiFile, $photoId);
@@ -125,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <div class="container">
     <h1>Edit Photo</h1>
     <form method="POST" action="">
-        <!-- Preview of the photo -->
         <div class="image-preview">
             <img src="../../public/foto/aset/<?php echo htmlspecialchars($photo['LokasiFile']); ?>" alt="Photo Preview">
         </div>
@@ -142,7 +136,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="userID">User ID:</label>
         <input type="number" id="userID" name="userID" value="<?php echo htmlspecialchars($photo['UserID']); ?>" required>
 
-        <!-- Input for LokasiFile -->
         <label for="lokasiFile">Lokasi File (Relative Path):</label>
         <input type="file" id="lokasiFile" name="lokasiFile" value="<?php echo htmlspecialchars($photo['LokasiFile']); ?>" required>
 

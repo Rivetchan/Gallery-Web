@@ -2,13 +2,11 @@
 session_start();
 include_once("../../config/koneksi.php");
 
-// Cek apakah pengguna sudah login dan levelnya admin (1)
 if (!isset($_SESSION['Username']) || $_SESSION['level'] != 1) {
     header("Location:../../login.php");
     exit();
 }
 
-// Cek apakah ID album ada di URL
 if (!isset($_GET['id'])) {
     header("Location: ../manage_albums.php");
     exit();
@@ -16,7 +14,6 @@ if (!isset($_GET['id'])) {
 
 $albumId = intval($_GET['id']);
 
-// Ambil data album dari database
 $sql_album = "SELECT * FROM album WHERE AlbumID = ?";
 $stmt = $kon->prepare($sql_album);
 $stmt->bind_param("i", $albumId);
@@ -29,12 +26,10 @@ if (!$album) {
     exit();
 }
 
-// Proses penyimpanan data jika form di-submit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $namaAlbum = $_POST['namaAlbum'];
     $deskripsi = $_POST['deskripsi'];
 
-    // Update data album
     $sql_update = "UPDATE album SET NamaAlbum=?, Deskripsi=? WHERE AlbumID=?";
     $stmt_update = $kon->prepare($sql_update);
     $stmt_update->bind_param("ssi", $namaAlbum, $deskripsi, $albumId);

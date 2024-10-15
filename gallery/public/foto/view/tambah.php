@@ -2,6 +2,9 @@
 include_once("../../../config/koneksi.php");
 include_once("../controller/fototambah.php");
 
+session_start();
+$userID = $_SESSION['UserID']; 
+
 $fotoController = new FotoController($kon);
 $FotoID = $fotoController->tambahFoto();
 
@@ -12,16 +15,16 @@ if (isset($_POST['submit'])) {
         'Deskripsi' => $_POST['Deskripsi'],
         'TanggalUnggah' => $_POST['TanggalUnggah'],
         'AlbumID' => $_POST['AlbumID'],
-        'UserID' => $_POST['UserID'],
+        'UserID' => $userID, 
     ];
 
     $message = $fotoController->tambahDataFoto($data);
 }
 
-$dataAlbum = "SELECT AlbumID, NamaAlbum FROM album";
+$dataAlbum = "SELECT AlbumID, NamaAlbum FROM album WHERE UserID = '$userID'";
 $hasilAlbum = mysqli_query($kon, $dataAlbum);
 
-$dataUser = "SELECT UserID, Username FROM user";
+$dataUser = "SELECT UserID, Username FROM user WHERE UserID = '$userID'";
 $hasilUser = mysqli_query($kon, $dataUser);
 ?>
 

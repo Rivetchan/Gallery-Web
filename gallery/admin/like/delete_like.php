@@ -2,7 +2,6 @@
 session_start();
 include_once("../../config/koneksi.php");
 
-// Cek apakah pengguna sudah login
 if (!isset($_SESSION['Username']) || $_SESSION['level'] != 1) {
     header("Location: ../../login.php");
     exit();

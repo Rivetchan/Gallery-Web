@@ -2,13 +2,11 @@
 session_start();
 include_once("../../config/koneksi.php");
 
-// Cek apakah pengguna sudah login dan levelnya admin (1)
 if (!isset($_SESSION['Username']) || $_SESSION['level'] != 1) {
     header("Location: ../../login.php");
     exit();
 }
 
-// Cek apakah ID pengguna ada di URL
 if (!isset($_GET['id'])) {
     header("Location: ../manage_users.php");
     exit();
@@ -16,7 +14,6 @@ if (!isset($_GET['id'])) {
 
 $userId = intval($_GET['id']);
 
-// Ambil data pengguna dari database
 $sql_user = "SELECT * FROM user WHERE UserID = ?";
 $stmt = $kon->prepare($sql_user);
 $stmt->bind_param("i", $userId);
@@ -29,14 +26,12 @@ if (!$user) {
     exit();
 }
 
-// Proses penyimpanan data jika form di-submit
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $namaLengkap = $_POST['namaLengkap'];
     $alamat = $_POST['alamat'];
 
-    // Update data pengguna
     $sql_update = "UPDATE user SET Username=?, Email=?, NamaLengkap=?, Alamat=? WHERE UserID=?";
     $stmt_update = $kon->prepare($sql_update);
     $stmt_update->bind_param("ssssi", $username, $email, $namaLengkap, $alamat, $userId);

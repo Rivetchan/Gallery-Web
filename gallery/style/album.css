@@ -44,21 +44,21 @@ body {
     margin: 10px;
     text-align: center;
     transition: transform 0.3s;
-    border: 1px solid #ddd; /* Border untuk membedakan gambar */
-    border-radius: 5px; /* Sudut yang membulat */
-    overflow: hidden; /* Memastikan konten tidak meluber */
-    background-color: #fff; /* Warna latar belakang item */
+    border: 1px solid #ddd; 
+    border-radius: 5px;
+    overflow: hidden; 
+    background-color: #fff; 
 }
 
 .gallery-item:hover {
-    transform: scale(1.05); /* Efek zoom saat hover */
+    transform: scale(1.05); 
 }
 
 .gallery-image {
-    width: 150px; /* Mengatur lebar gambar */
-    height: auto; /* Menjaga rasio aspek */
+    width: 150px; 
+    height: auto; 
     display: block;
-    margin: 0 auto; /* Pusatkan gambar */
+    margin: 0 auto; 
 }
 
 .info {
@@ -66,12 +66,133 @@ body {
 }
 
 .image-title {
-    font-size: 1.2em; /* Ukuran font judul */
+    font-size: 1.2em;
     margin: 5px 0;
     color: #333;
 }
 
 .image-description {
-    font-size: 0.9em; /* Ukuran font deskripsi */
-    color: #666; /* Warna untuk deskripsi */
+    font-size: 0.9em; 
+    color: #666; 
+}
+
+.comment-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.comment-section h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.comment-section p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #555;
+}
+
+.comment-section p strong {
+    color: #007bff;
+}
+
+.comment-section p em {
+    font-size: 0.85em;
+    color: #999;
+    margin-left: 5px;
+}
+
+.add-comment {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.add-comment textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    resize: none;
+}
+
+.add-comment button {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.add-comment button:hover {
+    background-color: #0056b3;
+}
+
+
+.like-section a {
+    display: inline-flex;
+    align-items: center;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+.like-section a .fas {
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.like-section a:hover {
+    color: #0056b3;
+}
+
+.like-section a:hover .fas {
+    color: #0056b3;
+}
+
+.like-section span {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.save-button {
+    position: absolute; 
+    top: 5px; 
+    right: 5px; 
+    background-color: red; 
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none; 
+    border-radius: 5px; 
+    font-weight: bold; 
+}
+
+@media screen and (max-width: 600px) {
+    .comment-section, .add-comment {
+        padding: 10px;
+    }
+}
+
+.image-description {
+    font-size: 14px; 
+}
+
+.short-description {
+    display: inline;
+}
+
+.full-description {
+    display: none; 
 }

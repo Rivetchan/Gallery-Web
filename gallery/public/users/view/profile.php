@@ -1,27 +1,23 @@
 <?php
 session_start();
-include_once("../config/koneksi.php");
+include_once('../../../config/koneksi.php');
 
-// Cek apakah pengguna sudah login
-if (!isset($_SESSION['Username'])) {
-    header("Location: ../login.php");
+if (!isset($_SESSION['UserID'])) {
+    header("Location: ../../../login.php");
     exit();
 }
 
-// Ambil data pengguna dari database
-$username = $_SESSION['Username'];
-$sql_user = "SELECT * FROM users WHERE Username = ?";
-$stmt = $kon->prepare($sql_user);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result_user = $stmt->get_result();
+$UserID = $_SESSION['UserID'];
 
-if ($result_user->num_rows > 0) {
-    $user = $result_user->fetch_assoc();
-} else {
-    echo "<script>alert('User not found!'); window.location.href='index.php';</script>";
-    exit();
+// Fetch user data
+$sql = "SELECT * FROM user WHERE UserID = '$UserID'";
+$result = $kon->query($sql);
+
+if (!$result) {
+    die("Query Error: " . $kon->error);
 }
+
+$user = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -29,73 +25,41 @@ if ($result_user->num_rows > 0) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <link href="css/admin.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .profile-info {
-            margin: 20px 0;
-        }
-
-        .profile-info label {
-            font-weight: bold;
-        }
-
-        .edit-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        .edit-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="../css/profile.css">
+    <title>Profil Pengguna</title>
 </head>
 <body>
-
-<?php include('admin_nav.php'); ?>
-
-<div class="container">
-    <h1>User Profile</h1>
-    <div class="profile-info">
-        <label>Username:</label>
-        <p><?php echo htmlspecialchars($user['Username']); ?></p>
-
-        <label>Email:</label>
-        <p><?php echo htmlspecialchars($user['Email']); ?></p>
-
-        <label>Nomor HP:</label>
-        <p><?php echo htmlspecialchars($user['NomorHP']); ?></p>
-
-        <label>Tanggal Lahir:</label>
-        <p><?php echo htmlspecialchars($user['TanggalLahir']); ?></p>
+    <div class="header">
+        <div class="logo">
+            <a href="../../../index.php">Gallery</a>
+        </div>
+        <div class="nav">
+            <a href="../../../index.php">Home</a>
+            <a href="../../album/view/album.php">Album</a>
+            <a href="../../foto/view/foto.php">Galeri Foto</a>
+            <a href="edit_password.php">Edit Password</a>
+            <a href="../../../logout.php">Logout</a>
+        </div>
     </div>
-    
-    <a href="edit_profile.php" class="edit-link">Edit Profile</a>
-</div>
 
+    <div class="content">
+        <h2>Profil Pengguna</h2>
+        <div class="profile-info">
+            <div class="profile-picture">
+                <img src="../aset/<?php echo htmlspecialchars($user['FotoUser']); ?>" alt="Profile Picture">
+                <form action="upload_foto.php" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="foto" accept="image/*">
+                    <button type="submit">Ganti Foto Profil</button>
+                </form>
+            </div>
+            <div class="info">
+                <p><strong>Nama Pengguna :</strong> <?php echo htmlspecialchars($user['Username']); ?></p>
+                <p><strong>Nama Lengkap :</strong> <?php echo htmlspecialchars($user['NamaLengkap']); ?></p>
+                <p><strong>Email :</strong> <?php echo htmlspecialchars($user['Email']); ?></p>
+                <p><strong>Alamat :</strong> <?php echo htmlspecialchars($user['Alamat']); ?></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

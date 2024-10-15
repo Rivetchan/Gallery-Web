@@ -20,11 +20,10 @@ $result_users = $kon->query($sql_users);
     <title>Manage Users</title>
     <link href="css/admin.css" rel="stylesheet">
     <style>
-        /* CSS untuk transisi tabel */
         table {
             width: 100%;
             border-collapse: collapse;
-            transition: all 0.3s ease; /* Transisi untuk semua perubahan */
+            transition: all 0.3s ease;
         }
 
         th, td {
@@ -34,19 +33,19 @@ $result_users = $kon->query($sql_users);
         }
 
         tr:hover {
-            background-color: #f1f1f1; /* Efek hover pada baris */
-            transform: scale(1.01); /* Efek transisi saat hover */
+            background-color: #f1f1f1; 
+            transform: scale(1.01);
         }
 
         a {
             margin-right: 10px;
             text-decoration: none;
             color: blue;
-            transition: color 0.3s; /* Transisi untuk warna link */
+            transition: color 0.3s;
         }
 
         a:hover {
-            color: darkblue; /* Warna saat hover link */
+            color: darkblue;
         }
     </style>
 </head>

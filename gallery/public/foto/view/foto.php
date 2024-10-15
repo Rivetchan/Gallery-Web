@@ -47,7 +47,7 @@ if (!$result) {
 <body> 
     <div class="header"> 
         <div class="logo"> 
-            <a href="#" style="text-decoration: none; color: black;">Gallery</a> 
+            <a href="../../../index.php" style="text-decoration: none; color: black;">Gallery</a> 
         </div>
         <div class="nav">
             <a class="active" href="../../../index.php">Home</a>
@@ -64,7 +64,7 @@ if (!$result) {
         <div class="dropdown profile-logo">
             <img src="../source/user.png" alt="Logo" onclick="toggleDropdown()">
             <div id="myDropdown" class="dropdown-content">
-                <a href="profile.php">Settings</a>
+                <a href="../../users/view/profile.php">Settings</a>
                 <a href="../../../logout.php">Logout</a>
             </div>
         </div>
@@ -78,12 +78,17 @@ if (!$result) {
                 echo "<img src='../aset/" . $row['LokasiFile'] . "' alt='" . $row['JudulFoto'] . "'>"; 
                 echo "<div class='info'>";
                 echo "<p class='title'>" . $row['JudulFoto'] . "</p>";
-                echo "<p class='username'>Uploaded by: " . $row['Username'] . "</p>"; 
+                echo "<p class='username'>Uploaded by: " . $row['Username'] . "</p>";
+                echo "<p class='deskripsi'>Deskripsi: " . $row['Deskripsi'] . "</p>";
                 echo "<p class='album-name'>Album: " . $row['NamaAlbum'] . "</p>"; 
+                echo "<p class='date'>Uploaded on: " . $row['TanggalUnggah'] . "</p>"; 
+                echo "</div>";
+
+                echo "<div class='edit-button'>";
+                echo "<a href='edit_foto.php?fotoid=" . $row['FotoID'] . "' class='edit-icon' title='Edit Foto'><i class='fas fa-ellipsis-v'></i></a>";
                 echo "</div>";
 
                 echo "<div class='action-buttons'>";
-                echo "<a href='komentar.php' class='chat-logo'><img src='../source/comment.png' alt='Chat' class='icon'/></a>";
                 echo "<a href='../aset/" . $row['LokasiFile'] . "' download class='save-button'>Save</a>";
                 
                 echo "</div>"; 
@@ -103,18 +108,16 @@ if (!$result) {
                                 ORDER BY k.TanggalKomentar DESC";
                 $komentarResult = $kon->query($komentarSql);
 
+                echo "<div class='comment-section'>";
                 if ($komentarResult !== false && $komentarResult->num_rows > 0) {
-                    echo "<div class='comment-section'>";
                     echo "<h4>Komentar:</h4>";
                     while($komentar = $komentarResult->fetch_assoc()) {
                         echo "<p><strong>" . $komentar['Username'] . ":</strong> " . $komentar['IsiKomentar'] . " <em>(" . $komentar['TanggalKomentar'] . ")</em></p>";
                     }
-                    echo "</div>";
                 } else {
-                    echo "<div class='comment-section'>";
                     echo "<p>Belum ada komentar.</p>";
-                    echo "</div>";
                 }
+                echo "</div>";
 
                 echo "<div class='add-comment'>";
                 echo "<form action='tambah_komentar.php' method='POST'>";
@@ -123,6 +126,7 @@ if (!$result) {
                 echo "<button type='submit'>Kirim</button>";
                 echo "</form>";
                 echo "</div>";
+
 
                 echo "</div>"; 
             }            

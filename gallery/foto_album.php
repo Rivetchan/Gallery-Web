@@ -10,14 +10,29 @@ if (!isset($_SESSION['UserID'])) {
 $currentUserID = $_SESSION['UserID']; 
 
 if (!isset($_GET['AlbumID'])) {
-    header("Location: public/foto/view/foto.php");
+    header("Location: foto_album.php");
     exit();
 }
 
-// Mengamankan input AlbumID
 $albumID = mysqli_real_escape_string($kon, $_GET['AlbumID']);
 $query = "SELECT * FROM foto WHERE AlbumID = '$albumID'";
 $ambildata = mysqli_query($kon, $query);
+
+if (!$ambildata) {
+    die("Query Failed: " . mysqli_error($kon));
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['isikomentar'])) {
+    $fotoID = mysqli_real_escape_string($kon, $_POST['fotoid']);
+    $komentarIsi = mysqli_real_escape_string($kon, $_POST['isikomentar']);
+    $tanggalKomentar = date('Y-m-d H:i:s');
+
+    $insertKomentar = "INSERT INTO komentarfoto (FotoID, UserID, IsiKomentar, TanggalKomentar) VALUES ('$fotoID', '$currentUserID', '$komentarIsi', '$tanggalKomentar')";
+    mysqli_query($kon, $insertKomentar);
+
+    header("Location: " . $_SERVER['PHP_SELF'] . "?AlbumID=" . $albumID);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -44,30 +59,34 @@ $ambildata = mysqli_query($kon, $query);
             while ($row = mysqli_fetch_array($ambildata)) {
                 $fotoID = $row['FotoID'];
 
-                // Menggunakan path yang benar untuk LokasiFile
                 echo "<div class='gallery-item'>";
                 echo "<img class='gallery-image' src='public/foto/aset/" . htmlspecialchars($row['LokasiFile']) . "' alt='" . htmlspecialchars($row['JudulFoto']) . "'>";
+                echo "<a href='public/foto/aset/" . htmlspecialchars($row['LokasiFile']) . "' class='save-button' download>Save</a>";
                 echo "<div class='info'>";
                 echo "<h3 class='image-title'>" . htmlspecialchars($row['JudulFoto']) . "</h3>";
-                echo "<p class='image-description'>" . htmlspecialchars($row['Deskripsi']) . "</p>";
-                
-                // Menampilkan jumlah like
+
+                $deskripsi = htmlspecialchars($row['Deskripsi']);
+                echo "<p class='image-description'>";
+                echo "<span class='full-description'>" . $deskripsi . "</span>";
+                echo "<span class='short-description' style='display:none;'>" . implode(' ', array_slice(explode(' ', $deskripsi), 0, 5)) . "...</span>";
+                echo "</p>";
+                echo "<a href='#' class='show-more' onclick='toggleDescription(this); return false;'>Show More</a>";
+
                 $likeCountQuery = "SELECT COUNT(*) AS likeCount FROM likefoto WHERE FotoID = '$fotoID'";
                 $likeCountResult = mysqli_query($kon, $likeCountQuery);
                 $likeCount = mysqli_fetch_assoc($likeCountResult)['likeCount'];
 
-                // Menampilkan status like user
                 $userLikedQuery = "SELECT COUNT(*) AS userLiked FROM likefoto WHERE FotoID = '$fotoID' AND UserID = '$currentUserID'";
                 $userLikedResult = mysqli_query($kon, $userLikedQuery);
                 $userLiked = mysqli_fetch_assoc($userLikedResult)['userLiked'] > 0;
 
                 echo "<div class='like-section'>";
                 echo "<a href='public/foto/view/like.php?fotoid=$fotoID' class='like-button' onclick=\"event.preventDefault(); likeFoto('$fotoID')\">";
+                echo "<i class='fas " . ($userLiked ? 'fa-thumbs-down' : 'fa-thumbs-up') . "'></i>";
                 echo "<span class='like-text'>" . ($userLiked ? 'Unlike' : 'Like') . "</span></a>";
                 echo "<span id='likeCount_$fotoID'>$likeCount</span> Likes";
                 echo "</div>";
 
-                // Mengambil komentar untuk foto ini
                 $komentarSql = "SELECT k.*, u.Username FROM komentarfoto k 
                                 JOIN user u ON k.UserID = u.UserID 
                                 WHERE k.FotoID = '$fotoID' 
@@ -115,16 +134,34 @@ $ambildata = mysqli_query($kon, $query);
                     const likeCountElement = document.getElementById('likeCount_' + fotoID);
                     likeCountElement.textContent = response.likeCount;
 
-                    // Mengubah teks button like
                     const likeButton = document.querySelector(`.like-button[href*='${fotoID}']`);
                     const likeText = likeButton.querySelector('.like-text');
+                    const likeIcon = likeButton.querySelector('.fas');
+
                     likeText.innerHTML = response.userLiked ? 'Unlike' : 'Like';
+                    likeIcon.classList.toggle('fa-thumbs-up', !response.userLiked);
+                    likeIcon.classList.toggle('fa-thumbs-down', response.userLiked);
                 } else {
                     console.error('Error: ' + xhr.status);
                 }
             }
         };
         xhr.send('fotoid=' + fotoID);
+    }
+
+    function toggleDescription(link) {
+        const fullDescription = link.previousElementSibling.firstElementChild; 
+        const shortDescription = link.previousElementSibling.lastElementChild; 
+
+        if (fullDescription.style.display === "none") {
+            fullDescription.style.display = "block"; 
+            shortDescription.style.display = "none"; 
+            link.textContent = "Show Less"; 
+        } else {
+            fullDescription.style.display = "none"; 
+            shortDescription.style.display = "inline"; 
+            link.textContent = "Show More"; 
+        }
     }
 </script>
 

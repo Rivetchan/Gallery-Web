@@ -265,24 +265,74 @@ body {
     font-size: 16px;
 }
 
+.like-section {
+    display: flex; 
+    align-items: center; 
+    margin-top: 10px; 
+}
+
+.like-button {
+    display: inline-flex; 
+    align-items: center;
+    text-decoration: none; 
+    color: #333; 
+    font-weight: bold;
+    margin-right: 10px; 
+    transition: color 0.3s; 
+}
+
+.like-button:hover {
+    color: #25D366; 
+}
+
+.comment-section {
+    margin-top: 20px; 
+}
+
+.comment-section h4 {
+    margin-bottom: 10px; 
+}
+
+.comment-section p {
+    background-color: #f1f1f1; 
+    padding: 8px; 
+    border-radius: 5px; 
+    margin: 5px 0;
+}
+
+.add-comment {
+    margin-top: 10px; 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.add-comment textarea {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px;
+}
+
+.add-comment button {
+    background-color: #25D366; 
+    color: white;
+    border: none; 
+    padding: 10px; 
+    border-radius: 5px;
+    cursor: pointer; 
+    transition: background-color 0.3s;
+}
+
+.add-comment button:hover {
+    background-color: #1aa659;
+}
+
 @media (max-width: 600px) {
     .popup-content {
         width: 90%; 
         padding: 15px;
     }
-}
-
-/* Hapus bagian komen dan like */
-.komentar {
-    display: none; /* Menghilangkan bagian komen */
-}
-
-.komentar-form {
-    display: none; /* Menghilangkan form komentar */
-}
-
-.action-buttons {
-    display: none; /* Menghilangkan tombol aksi */
 }
 
 @media print {
